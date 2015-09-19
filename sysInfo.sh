@@ -1,3 +1,6 @@
+#! /bin/bash
+
+#Prepare variable for echo
 toEcho=""
 
 #CPU Usage

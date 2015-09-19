@@ -1,7 +1,9 @@
 toEcho=""
 
+#CPU Usage
 toEcho="$[100-$(vmstat|tail -1|awk '{print $15}')]%"
 
+#RAM Usage
 memTotal=$(cat /proc/meminfo | grep 'MemTotal')
 memTotal="${memTotal/'MemTotal: '/''}"
 memTotal="${memTotal/' kB'/''}"
@@ -15,6 +17,7 @@ memUsed=$(printf "%.*f\n" 0 $memUsed)
 memUsed="$memUsed%"
 toEcho="$toEcho $memUsed"
 
+#Temperature
 tempLine="$(sensors | grep 'Core 0:')"
 beginningOfTempLine="Core 0:         +"
 endOfTempLine="  (high = +80.0°C, crit = +100.0°C)"
@@ -25,4 +28,5 @@ tempLine="${tempLine/'.0°C'/''}"
 tempLine="$tempLine°"
 toEcho="$toEcho $tempLine"
 
+#Return System Info
 echo $toEcho
